@@ -6,10 +6,10 @@ metadata:
     run: my-emp
 spec:
   ports:
-  - port: 80
-    targetPort: 3000
-    protocol: TCP
-  type: NodePort
+    - port: 80 # puerto interno de la LAN
+      targetPort: 3000 # exponiendo en el exterior
+      protocol: TCP
+  type: NodePort # salida a internet
   selector:
     run: my-emp
 
@@ -20,13 +20,13 @@ metadata:
   name: my-emp
 spec:
   replicas: 3
-  template: 
+  template:
     metadata:
       labels:
         run: my-emp
     spec:
       containers:
-      - name: my-emp
-        image: isaaccarrada/my-emp
-        ports:
-        - containerPort: 3000
+        - name: my-emp
+          image: isaaccarrada/my-emp
+          ports:
+            - containerPort: 3000
